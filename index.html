@@ -45,27 +45,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 64px;
+  padding-bottom: 6px;
   position: sticky;
   top: 0;
   z-index: 100;
 }
 .logo {
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--ink);
-  letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
 }
 .logo .hanwha {
   font-family: 'HanwhaB', sans-serif;
   font-weight: bold;
+  font-size: 22px;
+  color: var(--orange);
+  line-height: 1;
 }
-.logo .ppa {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500;
-  color: var(--ink);
-}
-.logo .hanwha { color: var(--orange); }
+
 .header-contact {
   font-size: 12px;
   color: var(--ink-3);
@@ -114,6 +114,7 @@ body {
   border-radius: 100px;
   margin-bottom: 1.25rem;
 }
+.hero h1 strong { font-weight: 700; font-style: normal; }
 .hero h1 {
   font-family: 'Noto Sans KR', sans-serif; font-weight: 700;
   font-size: clamp(26px, 4vw, 38px);
@@ -125,6 +126,7 @@ body {
 .hero h1 em {
   font-style: normal;
   color: var(--orange);
+  font-weight: 700;
 }
 .hero-sub {
   font-size: 14px;
@@ -550,7 +552,7 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 <body>
 
 <header class="site-header">
-  <div class="logo"><span class="hanwha">한화큐셀</span> <span class="ppa">직접PPA</span></div>
+  <div class="logo" onclick="goHome()" style="cursor:pointer"><span class="hanwha">한화큐셀</span></div>
   <div class="header-contact">문의 <strong>1600-3400</strong> · hqc.re100@qcells.com</div>
 </header>
 
@@ -559,7 +561,7 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
     영업일 1–2일 내 담당자 연락
   </div>
-  <h1>직접PPA<br><em>상담 신청</em></h1>
+  <h1><strong>직접PPA</strong><br><em>상담 신청</em></h1>
   <p class="hero-sub">발전소 정보를 입력해 주시면 최적의 계약 조건을 안내드립니다</p>
   <div class="hero-badges">
     <span class="badge">5 · 10 · 15 · 20년 계약</span>
@@ -889,6 +891,16 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 </footer>
 
 <script>
+function goHome(){
+  document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-1').classList.add('active');
+  document.getElementById('successScreen').style.display='none';
+  document.getElementById('stepIndicator').style.display='flex';
+  document.querySelector('.progress-bar').style.display='block';
+  currentStep=1;
+  updateStepUI(1);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 let currentStep = 1;
 const totalSteps = 5;
 const progressMap = {1:20, 2:40, 3:60, 4:80, 5:100};
